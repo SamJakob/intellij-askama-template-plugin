@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>com.samjakob.askama-template-support</id>
+    <name>Askama Template Support</name>
+    <vendor email="me@samjakob.com" url="https://samjakob.com/">SamJakob</vendor>
+
+    <description><![CDATA[
+    Adds (currently very basic) support for Askama template files to IntelliJ platform IDEs.
+    By default, this plugin recognizes <code>.askama</code> as a template file, however you can change this in File Associations.
+
+    I plan to add support for most, if not all, Askama keywords in the future and Rust integration too.
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <fileType name="Askama Template File" implementationClass="com.samjakob.askama.file.AskamaFileType"
+                  fieldName="INSTANCE" language="Askama" extensions="askama" />
+
+        <lang.parserDefinition language="Askama" implementationClass="com.samjakob.askama.parser.AskamaParserDefinition" />
+        <lang.fileViewProviderFactory language="Askama" implementationClass="com.samjakob.askama.file.AskamaFileViewProviderFactory" />
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
