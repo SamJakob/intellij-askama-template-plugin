@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.intellij' version '0.7.2'
 }
 
-group 'com.samjakob'
+group 'com.samjat   kob'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
@@ -23,4 +23,11 @@ intellij {
 patchPluginXml {
     changeNotes """
       Initial release."""
+}
+
+def env = new Properties()
+file(".env").withInputStream { env.load(it) }
+
+publishPlugin {
+    token = env.getProperty("JBM_TOKEN")
 }
