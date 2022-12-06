@@ -1,13 +1,13 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.7.0'
+    id 'org.jetbrains.intellij' version '1.10.0'
 }
 
 group 'com.samjakob'
-version '2022.1'
+version '2022.3'
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ sourceSets.main.java.srcDirs 'src/main/gen'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2022.1'
+    version = '2022.3'
     buildSearchableOptions.enabled = false
 }
 
