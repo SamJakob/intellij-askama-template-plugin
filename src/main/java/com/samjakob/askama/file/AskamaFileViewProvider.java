@@ -16,10 +16,10 @@ import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import com.samjakob.askama.AskamaLanguage;
 import com.samjakob.askama.lexer.AskamaTokenTypes;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 public class AskamaFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider {
@@ -64,7 +64,7 @@ public class AskamaFileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     @NotNull
     @Override
     public Set<Language> getLanguages() {
-        return new THashSet<>(Arrays.asList(AskamaLanguage.INSTANCE, myTemplateDataLanguage));
+        return new HashSet<>(Arrays.asList(AskamaLanguage.INSTANCE, myTemplateDataLanguage));
     }
 
     @NotNull
