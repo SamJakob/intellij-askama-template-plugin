@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.13.3'
+    id 'org.jetbrains.intellij' version '1.15.0'
 }
 
 group 'com.samjakob'
-version '2023.1'
+version '2023.2'
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -17,7 +17,7 @@ sourceSets.main.java.srcDirs 'src/main/gen'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2023.1'
+    version = '2023.2'
     buildSearchableOptions.enabled = false
 }
 
