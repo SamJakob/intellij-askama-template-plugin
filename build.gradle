@@ -1,27 +1,43 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.17.3'
+    id 'org.jetbrains.intellij.platform' version '2.0.1'
 }
 
 group 'com.samjakob'
-version '2024.1'
+version '2024.2'
 
-sourceCompatibility = 17
-targetCompatibility = 17
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 repositories {
     mavenCentral()
+
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 sourceSets.main.java.srcDirs 'src/main/gen'
 
-// See https://github.com/JetBrains/gradle-intellij-plugin/
-intellij {
-    version = '2024.1'
-    buildSearchableOptions.enabled = false
+intellijPlatform {
+    buildSearchableOptions = false
 }
 
-patchPluginXml {
+dependencies {
+    intellijPlatform {
+        // I want to support IntelliJ Community Edition too, but the Rust plugin is no longer available for Community
+        // Edition as of 2024.x. (See: https://plugins.jetbrains.com/plugin/8182--deprecated-rust/versions).
+        // So, I'm going to support Ultimate Edition unless people need Community Edition support and I can figure out
+        // how to make that happen.
+        intellijIdeaUltimate '2024.2'
+
+        pluginVerifier()
+        zipSigner()
+
+        instrumentationTools()
+    }
 }
 
 def env = new Properties()

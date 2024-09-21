@@ -31,25 +31,32 @@ DIRECTIVE_END = "%"
 %%
 
 <YYINITIAL> {
-      {COMMENT}                   { yybegin(YYINITIAL); return COMMENT; }
+    {COMMENT}                     { yybegin(YYINITIAL); return COMMENT; }
 
-      {OPENING}{DIRECTIVE_START}  { yybegin(ASKAMA_DIRECTIVE); return OPENING; }
-      {OPENING}{MACRO_START}      { yybegin(ASKAMA_MACRO); return OPENING; }
+    {OPENING}{DIRECTIVE_START}    { yybegin(ASKAMA_DIRECTIVE); return OPENING; }
+    {OPENING}{MACRO_START}        { yybegin(ASKAMA_MACRO); return OPENING; }
 
-      .                           { return TEMPLATE_HTML_TEXT; }
+//  The Rust compiler converts all CRLF to LF, so we only need to handle LF.
+    \n                            { return TEMPLATE_HTML_TEXT; }
+    .                             { return TEMPLATE_HTML_TEXT; }
 }
 
 <ASKAMA_DIRECTIVE> {
-      {STRING_LITERAL}                    { return STRING_LITERAL; }
-      {DIRECTIVE_END}{CLOSING}    { yybegin(YYINITIAL); return CLOSING; }
-      .                           { return ASKAMA_CONTENT; }
+    {WHITE_SPACE_CHAR}+           { return WHITE_SPACE; }
+    {STRING_LITERAL}              { return STRING_LITERAL; }
+    {DIRECTIVE_END}{CLOSING}      { yybegin(YYINITIAL); return CLOSING; }
+
+    \n                            { return ASKAMA_CONTENT; }
+    .                             { return ASKAMA_CONTENT; }
 }
 
 <ASKAMA_MACRO> {
-      {STRING_LITERAL}            { return STRING_LITERAL; }
-      {MACRO_END}{CLOSING}        { yybegin(YYINITIAL); return CLOSING; }
-      .                           { return ASKAMA_CONTENT; }
+    {WHITE_SPACE_CHAR}+           { return WHITE_SPACE; }
+    {STRING_LITERAL}              { return STRING_LITERAL; }
+    {MACRO_END}{CLOSING}          { yybegin(YYINITIAL); return CLOSING; }
+
+    \n                            { return ASKAMA_CONTENT; }
+    .                             { return ASKAMA_CONTENT; }
 }
 
-{WHITE_SPACE_CHAR}+               { return WHITE_SPACE; }
 .                                 { return BAD_CHARACTER; }

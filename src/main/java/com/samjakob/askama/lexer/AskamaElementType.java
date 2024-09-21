@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class AskamaElementType extends IElementType {
 
     public AskamaElementType(@NotNull String debugName) {
-        super(debugName, AskamaLanguage.INSTANCE);
+        super(debugName, AskamaLanguage.getInstance());
     }
 
     public String toString() {

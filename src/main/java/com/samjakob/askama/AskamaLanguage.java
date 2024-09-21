@@ -5,10 +5,14 @@ import com.intellij.psi.templateLanguages.TemplateLanguage;
 
 public class AskamaLanguage extends Language implements TemplateLanguage {
 
-    public static final AskamaLanguage INSTANCE = new AskamaLanguage();
+    private static final AskamaLanguage INSTANCE = new AskamaLanguage();
 
     private AskamaLanguage() {
         super("Askama");
+    }
+
+    public static AskamaLanguage getInstance() {
+        return INSTANCE;
     }
 
 }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class AskamaFile extends PsiFileBase {
 
     public AskamaFile(FileViewProvider provider) {
-        super(provider, AskamaLanguage.INSTANCE);
+        super(provider, AskamaLanguage.getInstance());
     }
 
     @NotNull

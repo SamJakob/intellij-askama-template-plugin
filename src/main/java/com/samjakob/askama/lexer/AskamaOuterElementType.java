@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class AskamaOuterElementType extends IElementType implements ILeafElementType {
 
     public AskamaOuterElementType(@NotNull @NonNls String debugName) {
-        super(debugName, AskamaLanguage.INSTANCE);
+        super(debugName, AskamaLanguage.getInstance());
     }
 
     @NotNull

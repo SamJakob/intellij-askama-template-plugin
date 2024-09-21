@@ -52,7 +52,7 @@ public class AskamaFileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     @NotNull
     @Override
     public Language getBaseLanguage() {
-        return AskamaLanguage.INSTANCE;
+        return AskamaLanguage.getInstance();
     }
 
     @NotNull
@@ -64,7 +64,7 @@ public class AskamaFileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     @NotNull
     @Override
     public Set<Language> getLanguages() {
-        return new HashSet<>(Arrays.asList(AskamaLanguage.INSTANCE, myTemplateDataLanguage));
+        return new HashSet<>(Arrays.asList(AskamaLanguage.getInstance(), myTemplateDataLanguage));
     }
 
     @NotNull
@@ -76,15 +76,11 @@ public class AskamaFileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     @Override
     protected PsiFile createFile(@NotNull Language language) {
         if (language == myTemplateDataLanguage) {
-
             PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(language).createFile(this);
             file.setContentElementType(templateDataElement);
             return file;
-
-        } else if (language == AskamaLanguage.INSTANCE) {
-
+        } else if (language == AskamaLanguage.getInstance()) {
             return LanguageParserDefinitions.INSTANCE.forLanguage(language).createFile(this);
-
         } else {
             return null;
         }
