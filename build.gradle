@@ -1,27 +1,35 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.17.3'
+    id 'org.jetbrains.intellij.platform' version '2.0.1'
 }
 
 group 'com.samjakob'
-version '2024.1'
-
-sourceCompatibility = 17
-targetCompatibility = 17
+version '2024.2'
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
+}
+
+dependencies {
+    intellijPlatform {
+        bundledPlugin 'com.intellij.java'
+        intellijIdeaCommunity '2024.2'
+
+        instrumentationTools()
+    }
 }
 
 sourceSets.main.java.srcDirs 'src/main/gen'
 
-// See https://github.com/JetBrains/gradle-intellij-plugin/
-intellij {
-    version = '2024.1'
-    buildSearchableOptions.enabled = false
-}
-
-patchPluginXml {
+intellijPlatform {
+    buildSearchableOptions = false
+    pluginConfiguration {
+        name = 'askama-template-support'
+    }
+    patchPluginXml {}
 }
 
 def env = new Properties()
