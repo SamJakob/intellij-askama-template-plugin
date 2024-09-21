@@ -116,3 +116,6 @@ Temporary Items
 
 # Env
 .env
+
+.intellijPlatform
+*.iml
