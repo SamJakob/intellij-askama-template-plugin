@@ -25,6 +25,12 @@ intellijPlatform {
     buildSearchableOptions = false
 }
 
+repositories {
+    intellijPlatform {
+        marketplace()
+    }
+}
+
 dependencies {
     intellijPlatform {
         // I want to support IntelliJ Community Edition too, but the Rust plugin is no longer available for Community
@@ -32,12 +38,20 @@ dependencies {
         // So, I'm going to support Ultimate Edition unless people need Community Edition support and I can figure out
         // how to make that happen.
         intellijIdeaUltimate '2024.2'
+        plugin('com.jetbrains.rust:242.21829.233')
 
         pluginVerifier()
         zipSigner()
 
         instrumentationTools()
     }
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 def env = new Properties()

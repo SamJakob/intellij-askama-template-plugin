@@ -13,17 +13,26 @@
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.rust</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <fileType name="Askama Template File" implementationClass="com.samjakob.askama.file.AskamaFileType"
-                  fieldName="INSTANCE" language="Askama" extensions="askama" />
+                  fieldName="INSTANCE" language="Askama" extensions="askama" patterns="*.askama.html" />
 
         <lang.parserDefinition language="Askama" implementationClass="com.samjakob.askama.parser.AskamaParserDefinition" />
         <lang.fileViewProviderFactory language="Askama" implementationClass="com.samjakob.askama.file.AskamaFileViewProviderFactory" />
+
+        <!-- Askama File Toolbar -->
+        <editorNotificationProvider implementation="com.samjakob.askama.toolbar.AskamaFileToolbarProvider" />
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <action
+            id="com.samjakob.askama.actions.AskamaJumpToRustStruct"
+            class="com.samjakob.askama.actions.AskamaJumpToRustStruct"
+            text="Go To Rust Struct"
+            description="Go to the Rust struct definition using the current template"
+            icon="AllIcons.Actions.StepOutCodeBlock" />
     </actions>
 </idea-plugin>
