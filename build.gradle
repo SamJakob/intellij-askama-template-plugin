@@ -4,7 +4,14 @@ plugins {
 }
 
 group 'com.samjakob'
-version '2024.3'
+version '2025.1'
+
+/** The version of the IDEA SDK to build against. */
+def ideaSdkVersion = '2024.3'
+/** The maximum build of IDEA that is supported (blank = any). */
+def ideaBuildUntil = ''
+/** The version of the Rust plugin that must be installed. */
+def rustPluginVersion = '242.21829.233'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -23,6 +30,14 @@ sourceSets.main.java.srcDirs 'src/main/gen'
 
 intellijPlatform {
     buildSearchableOptions = false
+
+    pluginConfiguration {
+        ideaVersion {
+            untilBuild = ideaBuildUntil == null || ideaBuildUntil.isBlank()
+                    ? provider { null }
+                    : ideaBuildUntil
+        }
+    }
 }
 
 repositories {
@@ -37,8 +52,8 @@ dependencies {
         // Edition as of 2024.x. (See: https://plugins.jetbrains.com/plugin/8182--deprecated-rust/versions).
         // So, I'm going to support Ultimate Edition unless people need Community Edition support and I can figure out
         // how to make that happen.
-        intellijIdeaUltimate version
-        plugin('com.jetbrains.rust:242.21829.233')
+        intellijIdeaUltimate ideaSdkVersion
+        plugin("com.jetbrains.rust:${rustPluginVersion}")
 
         pluginVerifier()
         zipSigner()
