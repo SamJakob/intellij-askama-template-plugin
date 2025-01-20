@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij.platform' version '2.0.1'
+    id 'org.jetbrains.intellij.platform' version '2.2.1'
 }
 
 group 'com.samjakob'
-version '2024.2'
+version '2024.3'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -37,7 +37,7 @@ dependencies {
         // Edition as of 2024.x. (See: https://plugins.jetbrains.com/plugin/8182--deprecated-rust/versions).
         // So, I'm going to support Ultimate Edition unless people need Community Edition support and I can figure out
         // how to make that happen.
-        intellijIdeaUltimate '2024.2'
+        intellijIdeaUltimate version
         plugin('com.jetbrains.rust:242.21829.233')
 
         pluginVerifier()
