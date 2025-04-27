@@ -4,14 +4,14 @@ plugins {
 }
 
 group 'com.samjakob'
-version '2025.1'
+version '2025.1.1'
 
 /** The version of the IDEA SDK to build against. */
-def ideaSdkVersion = '2024.3'
+def ideaSdkVersion = '2025.1'
 /** The maximum build of IDEA that is supported (blank = any). */
 def ideaBuildUntil = ''
 /** The version of the Rust plugin that must be installed. */
-def rustPluginVersion = '242.21829.233'
+def rustPluginVersion = '251.18673.38'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
