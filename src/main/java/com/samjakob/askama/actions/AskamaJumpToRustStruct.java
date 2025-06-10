@@ -127,7 +127,8 @@ public class AskamaJumpToRustStruct extends AskamaActionBase implements FileBase
                             }
                         }
                     });
-                    return false;
+                    // Continue iteration
+                    return true;
                 }
 
                 return true;
